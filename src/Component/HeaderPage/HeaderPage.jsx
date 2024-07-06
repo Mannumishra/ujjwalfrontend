@@ -97,12 +97,14 @@ const HeaderPage = () => {
           <Grid class="headerMain" container spacing={2}>
             <Grid item xs={8} md={2}>
               <div className="logo">
+                <Link to={'/'}>
                 <img
                   src={logo}
                   width={"100%"}
                   height={"100%"}
                   alt="Logo-Assorts"
-                />
+                  />
+                  </Link>
               </div>
             </Grid>
             <Grid item xs={4} md={6}>
@@ -398,7 +400,9 @@ const HeaderPage = () => {
         <div className="responsive-mobile">
           <div className="menu-header">
             <Typography className="menu-item">
+              <Link to={'/'}>
               <img src={logo} width={"100%"} alt="" />
+              </Link>
             </Typography>
             <button className="menu-button" onClick={toggleMenu}>
               ☰
@@ -468,12 +472,7 @@ const HeaderPage = () => {
               </ul>
             </li>
             <li className="responsiveli">
-              <Link to={"/"} onClick={closeMenu}>
-                News
-              </Link>
-            </li>
-            <li className="responsiveli">
-              <Link to={"/"} onClick={closeMenu}>
+              <Link to={"/contact"} onClick={closeMenu}>
                 Contact
               </Link>
             </li>

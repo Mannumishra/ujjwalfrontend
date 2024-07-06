@@ -94,7 +94,7 @@ const ProductDetailPage = () => {
             Details Of {data.productname}
             </b>
           </Typography>
-          <div dangerouslySetInnerHTML={{ __html: data.tableData }} />
+          <div style={{overflowX:'auto'}} dangerouslySetInnerHTML={{ __html: data.tableData }} />
         </Typography>
 
       </Container>
