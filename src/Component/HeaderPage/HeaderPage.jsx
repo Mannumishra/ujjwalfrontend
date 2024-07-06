@@ -1,0 +1,487 @@
+import {
+  Box,
+  Container,
+  Grid,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import logo from "../../images/logo-assorts.png";
+import "../HeaderPage/Header.css";
+import { Link } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import MailIcon from "@mui/icons-material/Mail";
+import CallIcon from "@mui/icons-material/Call";
+import experience from "../../images/experience.png";
+import axios from "axios";
+
+const HeaderPage = () => {
+  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const getApiData = async () => {
+    try {
+      let res = await axios.get("https://ujjwalbackend.onrender.com/api/subcategory");
+      const newData = res.data.data;
+
+      const groupedData = newData.reduce((acc, item) => {
+        if (!acc[item.categoryname]) {
+          acc[item.categoryname] = [];
+        }
+        acc[item.categoryname].push(item);
+        return acc;
+      }, {});
+
+      const groupedArray = Object.keys(groupedData).map(key => ({
+        name: key,
+        items: groupedData[key]
+      })).reverse();
+
+      setCategories(groupedArray);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+  const getCategorydata = async () => {
+    try {
+      let res = await axios.get("https://ujjwalbackend.onrender.com/api/category");
+      setData(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getApiData();
+    getCategorydata();
+  }, []);
+
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  return (
+    <>
+      <header>
+        <div className="topbar" style={{ backgroundColor: "rgb(36 45 71)" }}>
+          <Container>
+            <Box className="icons">
+              <Box class="icon"></Box>
+              <div style={{ display: "flex", gap: "15px" }}>
+                <FacebookIcon className="face" />
+                <InstagramIcon className="instagram" style={{ backgroundColor: 'radial-gradient(circle at 30% 107%, rgb(253, 244, 151) 0px, rgb(253, 244, 151) 5%, rgb(253, 89, 73) 45%, rgb(214, 36, 159) 60%, rgb(40, 90, 235) 90%)' }} />
+                <LinkedInIcon className="linkedin" />
+                <YouTubeIcon className="youtube" />
+              </div>
+            </Box>
+          </Container>
+        </div>
+        <div class="for-laptop">
+          <Grid class="headerMain" container spacing={2}>
+            <Grid item xs={8} md={2}>
+              <div className="logo">
+                <img
+                  src={logo}
+                  width={"100%"}
+                  height={"100%"}
+                  alt="Logo-Assorts"
+                />
+              </div>
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <div class="navItem">
+                <ul className="navbarUl">
+                  <li class="navbarLi">
+                    <Link class="ul_li_links" to={"/"}>
+                      Home
+                    </Link>
+                  </li>
+                  <li class="navbarLi">
+                    <Link class="ul_li_links" to={"/about"}>
+                      About
+                    </Link>
+                  </li>
+                  <li class="navbarLi dropdown">
+                    <li style={{ display: "flex", alignItems: "center" }}>
+                      Category <ArrowDropDownIcon />
+                    </li>
+                    <div class="dropdown-content">
+                      <div class="dropdown_inner_content">
+                        {categories.map(category => (
+                          <div key={category.name} className="dropdownWidth">
+                            <Typography className="dropdownheading">
+                              {category.name}
+                            </Typography>
+                            {category.items.map(item => (
+                              <p key={item._id}>
+                                <Link className="headingContent" to={`/our-category/products/${item._id}`}>
+                                  <KeyboardDoubleArrowRightIcon
+                                    style={{
+                                      fontSize: "14px",
+                                      color: "rgb(18, 80, 141)",
+                                    }}
+                                  />
+                                  {item.subcategoryName}
+                                </Link>
+                              </p>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* <div class="dropdown_inner_content">
+                        <div class="dropdownWidth">
+                          <Typography class="dropdownheading">
+                            Measuring Tools & Equipments
+                          </Typography>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Clipers
+                            </Link>
+                          </p>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Edge Finders
+                            </Link>
+                          </p>
+                          <p>
+                            <Link
+                              class="headingContent"
+                              to={"/"}
+                              style={{ border: "none" }}
+                            >
+                              view more
+                            </Link>
+                          </p>
+                        </div>
+                        <div class="dropdownWidth">
+                          <Typography class="dropdownheading">
+                            Jewellery & Watch Making
+                          </Typography>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Anvils
+                            </Link>
+                          </p>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Dapping & Doming Steel Punch Sets & Blocks
+                            </Link>
+                          </p>
+                          <p>
+                            <Link
+                              class="headingContent"
+                              to={"/"}
+                              style={{ border: "none" }}
+                            >
+                              view more
+                            </Link>
+                          </p>
+                        </div>
+                        <div class="dropdownWidth">
+                          <Typography class="dropdownheading">
+                            DIY Tools (General WorkShop Tools)
+                          </Typography>
+                          <p>
+                            <Link class="headingContent" to={""}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Diamond Dressors
+                            </Link>
+                          </p>
+                          <p>
+                            <Link class="headingContent" to={""}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Inspection Plate
+                            </Link>
+                          </p>
+                          <p>
+                            <Link
+                              class="headingContent"
+                              to={""}
+                              style={{ border: "none" }}
+                            >
+                              view more
+                            </Link>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="dropdown_inner_content">
+                        <div class="dropdownWidth">
+                          <Typography class="dropdownheading">
+                            Best Seller Best Combos
+                          </Typography>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Chucks Mounted On Rotary Tables
+                            </Link>
+                          </p>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Miling Indexing Kit
+                            </Link>
+                          </p>
+                          <p>
+                            <Link
+                              class="headingContent"
+                              to={"/"}
+                              style={{ border: "none" }}
+                            >
+                              view more
+                            </Link>
+                          </p>
+                        </div>
+                        <div class="dropdownWidth">
+                          <Typography class="dropdownheading">
+                            Indexable Tool
+                          </Typography>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Boring Bars For CNC Lathe Machine
+                            </Link>
+                          </p>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Turning Tools Set With Inserts
+                            </Link>
+                          </p>
+                          <p>
+                            <Link
+                              class="headingContent"
+                              to={"/"}
+                              style={{ border: "none" }}
+                            >
+                              view more
+                            </Link>
+                          </p>
+                        </div>
+                        <div class="dropdownWidth">
+                          <Typography class="dropdownheading">
+                            HSS Cutting & Finishing Tools
+                          </Typography>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Angle Cutters
+                            </Link>
+                          </p>
+                          <p>
+                            <Link class="headingContent" to={"/"}>
+                              <KeyboardDoubleArrowRightIcon
+                                style={{
+                                  fontSize: "14px",
+                                  color: "rgb(18, 80, 141)",
+                                }}
+                              />
+                              Countersinks Tools
+                            </Link>
+                          </p>
+                          <p>
+                            <Link
+                              class="headingContent"
+                              to={"/"}
+                              style={{ border: "none" }}
+                            >
+                              view more
+                            </Link>
+                          </p>
+                        </div>
+                      </div> */}
+                    </div>
+                  </li>
+                  <li class="navbarLi">
+                    <Link class="ul_li_links" to={"/contact"}>
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </Grid>
+            <Grid
+              item
+              xs={4}
+              md={4}
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <SearchIcon style={{ color: "white", marginLeft: "1rem" }} />
+                <input class="searchbar" type="text" placeholder="Search" />
+              </div>
+              <img
+                style={{ position: "relative" }}
+                width={"25%"}
+                src={experience}
+                alt="experience"
+              />
+            </Grid>
+          </Grid>
+        </div>
+        <div className="responsive-mobile">
+          <div className="menu-header">
+            <Typography className="menu-item">
+              <img src={logo} width={"100%"} alt="" />
+            </Typography>
+            <button className="menu-button" onClick={toggleMenu}>
+              ☰
+            </button>
+          </div>
+          <ul className={`responsiveUl ${menuOpen ? "open" : ""}`}>
+            <li className="responsiveli">
+              <Link to={"/"} onClick={closeMenu}>
+                Home
+              </Link>
+            </li>
+            <li className="responsiveli">
+              <Link to={"/about"} onClick={closeMenu}>
+                About
+              </Link>
+            </li>
+            <li className="responsiveli">
+              <div style={{ display: "flex", alignItems: "center" }}>
+                Category <KeyboardDoubleArrowRightIcon />
+              </div>
+              <ul className="dropdown">
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    Lathe Machine Accessories
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    Milling Machine Accessories
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    Vices & Work
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    Measuring Tools & Equipments
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    Jewellery & Watch Making
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    DIY Tools (General WorkShop Tools)
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    Best Seller Best Combos
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    Indexable Tool
+                  </Link>
+                </li>
+                <li className="dropdown-item">
+                  <Link to={"/"} onClick={closeMenu}>
+                    HSS Cutting & Finishing Tools
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li className="responsiveli">
+              <Link to={"/"} onClick={closeMenu}>
+                News
+              </Link>
+            </li>
+            <li className="responsiveli">
+              <Link to={"/"} onClick={closeMenu}>
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </>
+  );
+};
+
+export default HeaderPage;

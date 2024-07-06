@@ -1,0 +1,7 @@
+.box{
+    border-radius: 30px;
+    overflow: hidden;
+}
+.box img{
+    border-radius: 30px;
+}

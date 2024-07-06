@@ -1,0 +1,270 @@
+.navbarUl {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+}
+
+header {
+  background-color: #1d2c59;
+}
+.headerMain {
+  display: flex;
+  align-items: center;
+}
+.search_number {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ul_li_links {
+  color: white;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1d2c59;
+  border-radius: 10px;
+  min-width: 700px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 10px;
+  right: -21rem;
+  height: 220px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 1;
+  top: 150%;
+}
+
+  .dropdown-content::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .dropdown-content::-webkit-scrollbar-track {
+    background-color: darkgrey;
+    border-radius: 25px;
+  }
+
+  .dropdown-content::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  /* opacity: 1 !important; */
+  /* height: 220px !important; */
+}
+.dropdown_inner_content {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+  line-height: 1px;
+}
+.dropdownheading {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  height: 30px;
+}
+
+.headingContent {
+  width: 90%;
+  display: flex;
+  color: white;
+  font-size: 12px;
+  border-bottom: 1px solid;
+  justify-content: center;
+}
+.headingContent:hover {
+  color: #69c7d3;
+}
+.dropdownWidth {
+  width: 50%;
+}
+.responsive-mobile {
+  display: none;
+}
+
+.instagram{
+  background: radial-gradient(circle at 30% 107%, #fdf497 0px, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+
+  color: white;
+  padding: 2px;
+}
+.face{
+color: white;
+background-color: #1877F2;
+padding: 2px;
+}
+.linkedin{
+background-color: #0A66C2;
+color: white;
+padding: 2px;
+}
+.youtube{
+background-color: #FF0000;
+color: white;
+padding: 2px;
+}
+@media only screen and (max-width: 600px) {
+  .for-laptop {
+    display: none;
+  }
+  .responsive-mobile {
+    display: block;
+  }
+  .menu-header {
+    padding: 0rem !important;
+  }
+  .topbar {
+    display: none;
+  }
+}
+
+.responsive-mobile {
+  position: relative;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgb(18, 80, 141);
+  color: white;
+}
+
+.menu-item {
+  width: 50%;
+  align-items: center;
+  display: flex;
+}
+
+.menu-button {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Menu styles */
+.responsiveUl {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  background-color: rgb(18, 80, 141);
+  position: absolute;
+  width: 50%;
+  top: 100%;
+  right: 0;
+  z-index: 1;
+  transition: all 0.5s ease-in;
+}
+
+.responsiveUl.open {
+  display: block;
+  transition: 1s ease;
+}
+
+.responsiveli {
+  padding: 1rem;
+  border-bottom: 1px solid #444;
+  color: white;
+}
+
+.responsiveli a {
+  color: white;
+  text-decoration: none;
+}
+
+.searchbar {
+  border: 1px solid white;
+  background-color: transparent;
+  border-radius: 22px;
+  padding: 10px 20px 10px 45px;
+  position: absolute;
+  font-size: 12px;
+  color: white;
+  font-family: poppins;
+  width: 22%;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+/* Dropdown styles */
+.dropdown {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  color: white;
+}
+
+.responsiveli:hover .dropdown {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #444;
+  background-color: #1d2c59;
+  overflow-y: scroll;
+}
+
+.dropdown-item a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Responsive icons */
+@media (min-width: 768px) {
+  .menu-button {
+    display: none;
+  }
+
+  .responsiveUl {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    background-color: transparent;
+  }
+
+  .responsiveli {
+    border: none;
+    padding: 1rem 1.5rem;
+  }
+
+  .dropdown {
+    cursor: pointer;
+    position: relative;
+    top: 100%;
+    left: 0;
+    display: block;
+    min-height: 0;
+  }
+
+  .responsiveli:hover .dropdown {
+    display: block;
+    transition: min-height 1s ease;
+  }
+
+  .dropdown-item {
+    width: 200px;
+  }
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
