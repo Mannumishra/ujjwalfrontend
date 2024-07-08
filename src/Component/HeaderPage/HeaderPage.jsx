@@ -423,7 +423,7 @@ const HeaderPage = () => {
               <div style={{ display: "flex", alignItems: "center" }}>
                 Category <KeyboardDoubleArrowRightIcon />
               </div>
-              <ul className="dropdown">
+              <ul className="dropdown ">
                 <li className="dropdown-item">
                   <Link to={"/"} onClick={closeMenu}>
                     Lathe Machine Accessories
