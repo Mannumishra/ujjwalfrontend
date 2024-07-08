@@ -5,7 +5,7 @@ import {Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 const About = () => {
   return (
-    <div>
+    <div style={{background:'white'}}>
       <Container>
       <Grid mt={5} container spacing={2} mb={5}>
         <Grid item xs={12} md={6}>

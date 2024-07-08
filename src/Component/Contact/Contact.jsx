@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid, TextField, Typography } from "@mui/material";
 import "../Contact/Contact.css";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -25,7 +25,7 @@ const Contact = () => {
     try {
       let res = await axios.post("https://ujjwalbackend.onrender.com/api/contact", data)
       if (res.status === 200) {
-        toast.success("Message sent successfully");
+        toast .success("Message sent successfully");
         setData({
           name: "",
           companyname: "",
@@ -42,7 +42,12 @@ const Contact = () => {
       console.log(error)
     }
   }
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
   return (
     <>
       <div class="contact-bg">

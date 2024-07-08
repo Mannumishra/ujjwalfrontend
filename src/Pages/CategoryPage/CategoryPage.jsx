@@ -202,7 +202,9 @@ const CategoryPage = () => {
                   }}
                 >
                   <button className="viewButton" onClick={() => handleOpenModal(product)}>View</button>
+                  <Link to={"/contact"}>
                   <button className="viewButton">Enquiry Now</button>
+                  </Link>
                 </div>
               </div>
             ))}

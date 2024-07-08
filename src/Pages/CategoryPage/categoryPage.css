@@ -104,7 +104,7 @@ a {
   position: absolute;
   left: -32%;
   top: 0;
-  width: 3.5rem;
+  width: 42px;
   height: 100%;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
@@ -202,7 +202,6 @@ footer {
   width: 100%;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
 }
 .overlay {
@@ -219,6 +218,8 @@ footer {
 .bottomContent {
   font-size: 13px;
   color: white;
+  max-width: 60%;
+  margin: auto;
 }
 
 @media screen and (max-width: 600px) {
