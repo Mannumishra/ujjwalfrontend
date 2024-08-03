@@ -10,6 +10,7 @@ header {
 .headerMain {
   display: flex;
   align-items: center;
+  height: 60px;
 }
 .search_number {
   display: flex;
