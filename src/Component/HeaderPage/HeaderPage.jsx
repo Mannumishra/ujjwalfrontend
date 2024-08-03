@@ -29,10 +29,12 @@ const HeaderPage = () => {
 
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
-      window.scrollTo({
-        top:1000,
-        behavior:"smooth"
-      })
+      if (window.location.pathname === '/') {
+        window.scrollTo({
+          top: 1000,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
