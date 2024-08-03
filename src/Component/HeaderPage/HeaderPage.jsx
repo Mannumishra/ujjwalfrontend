@@ -84,7 +84,7 @@ const HeaderPage = () => {
           <Container>
             <Box className="icons">
               <Box class="icon"></Box>
-              <div style={{ display: "flex",flex:"end", gap: "15px" }}>
+              <div style={{ display: "flex",justifyContent: "flex-end", gap: "15px" }}>
                 <FacebookIcon className="face" />
                 <InstagramIcon className="instagram" style={{ backgroundColor: 'radial-gradient(circle at 30% 107%, rgb(253, 244, 151) 0px, rgb(253, 244, 151) 5%, rgb(253, 89, 73) 45%, rgb(214, 36, 159) 60%, rgb(40, 90, 235) 90%)' }} />
                 <LinkedInIcon className="linkedin" />
