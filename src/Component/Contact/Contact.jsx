@@ -22,6 +22,7 @@ const Contact = () => {
 
   const postdata = async(e) => {
     e.preventDefault()
+    console.log(data)
     try {
       let res = await axios.post("https://ujjwalbackend.onrender.com/api/contact", data)
       if (res.status === 200) {
@@ -101,7 +102,7 @@ const Contact = () => {
                           <TextField
                             id="outlined-basic"
                             variant="outlined"
-                            fullWidth name="name" onChange={getInputData}
+                            fullWidth name="name" onChange={getInputData} value={data.name}
                             sx={{
                               height: "40px",
                               "& .MuiInputBase-root": {
@@ -116,7 +117,7 @@ const Contact = () => {
                           <TextField
                             id="outlined-basic"
                             variant="outlined"
-                            fullWidth name="companyname" onChange={getInputData}
+                            fullWidth name="companyname" onChange={getInputData} value={data.companyname}
                             sx={{
                               height: "40px",
                               "& .MuiInputBase-root": {
@@ -131,7 +132,7 @@ const Contact = () => {
                           <TextField
                             id="outlined-basic"
                             variant="outlined"
-                            fullWidth name="email" onChange={getInputData}
+                            fullWidth name="email" onChange={getInputData} value={data.email}
                             sx={{
                               height: "40px",
                               "& .MuiInputBase-root": {
@@ -146,7 +147,7 @@ const Contact = () => {
                           <TextField
                             id="outlined-basic"
                             variant="outlined"
-                            fullWidth name="phone" onChange={getInputData}
+                            fullWidth name="phone" onChange={getInputData} value={data.phone}
                             sx={{
                               height: "40px",
                               "& .MuiInputBase-root": {
@@ -161,7 +162,7 @@ const Contact = () => {
                           <TextField
                             fullWidth
                             id="outlined-basic"
-                            variant="outlined" name="address" onChange={getInputData}
+                            variant="outlined" name="address" onChange={getInputData} value={data.address}
                             sx={{
                               height: "40px",
                               "& .MuiInputBase-root": {
@@ -177,7 +178,7 @@ const Contact = () => {
                             fullWidth
                             id="outlined-basic"
                             variant="outlined"
-                            multiline name="message" onChange={getInputData}
+                            multiline name="message" onChange={getInputData} value={data.message}
                             rows={4}
                             sx={{
                               borderRadius: "5px",
