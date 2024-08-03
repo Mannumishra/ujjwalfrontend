@@ -161,7 +161,7 @@ const HeaderPage = () => {
               item
               xs={4}
               md={4}
-              style={{ display: "flex", justifyContent: "space-between" }}
+              style={{ display: "flex", justifyContent: "space-between",alignItems:"center" }}
             >
               <div style={{ display: "flex", alignItems: "center" }}>
                 <SearchIcon style={{ color: "white", marginLeft: "1rem" }} />
