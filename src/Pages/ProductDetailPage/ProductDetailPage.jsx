@@ -9,13 +9,16 @@ const ProductDetailPage = () => {
   const { _id } = useParams();
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState('');
 
-  console.log(data)
+  console.log(data);
+
   const getAllProductData = async () => {
     try {
       let res = await axios.get(`https://ujjwalbackend.onrender.com/api/product/${_id}`);
-      console.log(res.data.data)
+      console.log(res.data.data);
       setData(res.data.data);
+      setSelectedImage(res.data.data.image2); // Set the initial selected image
     } catch (error) {
       setError(error);
       console.log(error);
@@ -26,6 +29,12 @@ const ProductDetailPage = () => {
     getAllProductData();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [_id]);
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
+
+  const images = [data.image1, data.image2, data.image3, data.image4].filter(Boolean);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -66,8 +75,21 @@ const ProductDetailPage = () => {
                 sx={{ padding: { xs: "1rem", md: "2rem", sm: "1rem" } }}
                 style={{ border: "1px solid lightgray" }}
               >
-                <img src={data.image2} width={"100%"} alt={data.categoryname} />
+                <img src={selectedImage} width={"100%"} alt={data.categoryname} />
               </Typography>
+              <Grid container spacing={2} mt={2}>
+                {images.map((image, index) => (
+                  <Grid item xs={3} key={index}>
+                    <img
+                      src={image}
+                      width={"100%"}
+                      alt={`Thumbnail ${index + 1}`}
+                      style={{ cursor: "pointer", border: selectedImage === image ? "2px solid blue" : "none" }}
+                      onClick={() => handleImageClick(image)}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
             </Grid>
             <Grid
               item
@@ -80,7 +102,7 @@ const ProductDetailPage = () => {
                 {data.productname}
                 </b>
               </Typography>
-              <Typography className="points"  variant="body1" mb={3}>
+              <Typography className="points" variant="body1" mb={3}>
                 {data.details}
               </Typography>
             </Grid>
@@ -96,9 +118,7 @@ const ProductDetailPage = () => {
           </Typography>
           <div style={{overflowX:'auto'}} dangerouslySetInnerHTML={{ __html: data.tableData }} />
         </Typography>
-
       </Container>
-
       <Product />
     </>
   );
