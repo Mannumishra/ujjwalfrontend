@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useState } from "react";
 import logo from "../../images/logo-assorts.png";
 import "../HeaderPage/Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -24,7 +24,17 @@ import axios from "axios";
 
 const HeaderPage = () => {
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleSearch = (e) => {
+    if (e.key === 'Enter') {
+      window.scrollTo({
+        top:1000,
+        behavior:"smooth"
+      })
+    }
+  };
 
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -53,7 +63,7 @@ const HeaderPage = () => {
     }
   };
 
-  
+
   const getCategorydata = async () => {
     try {
       let res = await axios.get("https://ujjwalbackend.onrender.com/api/category");
@@ -84,7 +94,7 @@ const HeaderPage = () => {
           <Container>
             <Box className="icons">
               <Box class="icon"></Box>
-              <div style={{ display: "flex",justifyContent: "flex-end", gap: "15px" }}>
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: "15px" }}>
                 <FacebookIcon className="face" />
                 <InstagramIcon className="instagram" style={{ backgroundColor: 'radial-gradient(circle at 30% 107%, rgb(253, 244, 151) 0px, rgb(253, 244, 151) 5%, rgb(253, 89, 73) 45%, rgb(214, 36, 159) 60%, rgb(40, 90, 235) 90%)' }} />
                 <LinkedInIcon className="linkedin" />
@@ -98,13 +108,13 @@ const HeaderPage = () => {
             <Grid item xs={8} md={2}>
               <div className="logo">
                 <Link to={'/'}>
-                <img
-                  src={logo}
-                  width={"100%"}
-                  height={"100%"}
-                  alt="Logo-Assorts"
+                  <img
+                    src={logo}
+                    width={"100%"}
+                    height={"100%"}
+                    alt="Logo-Assorts"
                   />
-                  </Link>
+                </Link>
               </div>
             </Grid>
             <Grid item xs={4} md={6}>
@@ -161,11 +171,13 @@ const HeaderPage = () => {
               item
               xs={4}
               md={4}
-              style={{ display: "flex", justifyContent: "space-between",alignItems:"center" }}
+              style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
             >
               <div style={{ display: "flex", alignItems: "center" }}>
                 <SearchIcon style={{ color: "white", marginLeft: "1rem" }} />
-                <input class="searchbar" type="text" placeholder="Search" />
+                <input class="searchbar" type="text" placeholder="Search" value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleSearch} />
               </div>
               <img
                 style={{ position: "relative" }}
@@ -180,7 +192,7 @@ const HeaderPage = () => {
           <div className="menu-header">
             <Typography className="menu-item">
               <Link to={'/'}>
-              <img src={logo} width={"100%"} alt="" />
+                <img src={logo} width={"100%"} alt="" />
               </Link>
             </Typography>
             <button className="menu-button" onClick={toggleMenu}>
